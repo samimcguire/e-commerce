@@ -11,7 +11,7 @@ const BookCard = ({ image, price, title, isbn13, updateFavorite }) => {
     return(
         <div className="book-card">
             <p onClick={(handleClick)}>{isFavorite ? "💙" : "🤍"}</p>
-            <img src={image} />
+            <img src={image} alt="book cover" />
             <p>{title}</p>
             <p>{price}</p>
             <button>Cart</button>
