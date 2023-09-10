@@ -35,15 +35,15 @@ function App() {
   }
 
   const handleAddToCart = (bookValue, bookTitle, isbn13) => {
-    let total = Number(bookValue.replace(/[^0-9.-]+/g,""));
-    setCartTotal(cartTotal + total)
+    let bookPrice = Number(bookValue.replace(/[^0-9.-]+/g,""));
+    setCartTotal(cartTotal + bookPrice)
 
     let isInCart = cartItems.find(item => item.isbn13 === isbn13);
 
     if (isInCart) {
         isInCart.quantity++
       } else {
-        isInCart = { price: total, titel: bookTitle, quantity: 1}
+        isInCart = { price: bookPrice, title: bookTitle, quantity: 1, isbn13}
         setCartItems([...cartItems, isInCart])
       }
   }
@@ -57,7 +57,7 @@ function App() {
         <Route path="/" element={<Home books={books} handleAddToFavorites={handleAddToFavorites} handleAddToCart={handleAddToCart}/>} />
         <Route path="/favorites" element={<Favorites favorites={favorites} handleAddToFavorites={handleAddToFavorites} />} />
         <Route path='/bookdetails/:isbn13' element={<BookDetails books={books} />}/>
-        <Route path='/cart' element={<Cart total={cartTotal}/>} />
+        <Route path='/cart' element={<Cart total={cartTotal} cartItems={cartItems}/>} />
       </Routes>
       
     </div>
@@ -65,3 +65,11 @@ function App() {
 }
 
 export default App;
+
+
+
+/*
+1. bug on favorite items that are unselected on books list
+2. only two decimals on totals
+3. cart button doesn't work from favorites list
+*/
