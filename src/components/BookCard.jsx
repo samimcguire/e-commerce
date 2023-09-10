@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-const BookCard = ({ image, price, title, isbn13, updateFavorite, isFav }) => {
+const BookCard = ({ image, price, title, isbn13, updateFavorite, isFav, handleAddToCart }) => {
     const [isFavorite, setIsFavorite] = useState(isFav)
 
     const handleClick = () => {
@@ -20,7 +20,7 @@ const BookCard = ({ image, price, title, isbn13, updateFavorite, isFav }) => {
                 <p>{title}</p>
                 <p>{price}</p>
             </Link>
-            <button>Cart</button>
+            <button onClick={() => handleAddToCart(price, title, isbn13)}>Cart</button>
         </div>
     )
 }
@@ -28,5 +28,9 @@ const BookCard = ({ image, price, title, isbn13, updateFavorite, isFav }) => {
 export default BookCard;
 
 /*
-When clicking on Cart button, we want to add to an array Cart on app.js
+When clicking on Cart button, we want to add to an array CartItems on app.js 
+this array will store object with book title, quantity, unit price
+is element already there?
+    if no, add book title, quantity 1, unit price
+    if yes, add one to quantity: quantity + 1
 */
